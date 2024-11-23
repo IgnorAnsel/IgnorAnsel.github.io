@@ -21,10 +21,10 @@ function sendMessage() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer Token-NjVhMGQ3ZTUxYjk5YmMwMDEzMDY4MjBmOlk3blhtRmJtTFBRQVU1NHZMWA=='  // 注意这里的 API 密钥是暴露的
+            'Authorization': 'Bearer Token-NjVhMGQ3ZTUxYjk5YmMwMDEzMDY4MjBmOlk3blhtRmJtTFBRQVU1NHZMWA=='  // 你的 API 密钥
         },
         body: JSON.stringify({
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-3.5-turbo',  // 使用 GPT-3.5 模型
             messages: [
                 { role: 'system', content: '你是一个帮助用户的聊天机器人。' },
                 { role: 'user', content: userInput }
