@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <div class="container">
         <!-- 左侧个人信息 -->
@@ -19,9 +21,10 @@
             <div class="contact">
                 <h3>联系方式</h3>
                 <ul>
-                    <li>GitHub: <a href="https://github.com/IgnorAnsel" target="_blank">github.com/IgnorAnsel</a></li>
+                    <li>GitHub: <a href="https://github.com/IgnorAnsel" target="_blank">IgnorAnsel</a></li>
                     <li>Email: ansel09@163.com</li>
-                    <li>Bilibili: <a href="https://space.bilibili.com/286896507?spm_id_from=333.1007.0.0" target="_blank">Ansel-谷沐苏</a></li>
+                    <li>Bilibili: <a href="https://space.bilibili.com/286896507?spm_id_from=333.1007.0.0"
+                            target="_blank">Ansel-谷沐苏</a></li>
                 </ul>
             </div>
         </div>
@@ -31,9 +34,10 @@
             <h3>我的内容</h3>
             <!-- 选项卡按钮 -->
             <div class="tabs">
-                <button class="tab-button active" data-tab="github-projects" onclick="showTab('github-projects')">GitHub 项目</button>
+                <button class="tab-button active" data-tab="github-projects" onclick="showTab('github-projects')">GitHub
+                    项目</button>
                 <button class="tab-button" data-tab="pending" onclick="showTab('pending')">待定</button>
-                <button class="tab-button" data-tab="blog" onclick="showTab('blog')">Blog</button> <!-- 新增按钮 -->
+                <button class="tab-button" data-tab="blog" onclick="showTab('blog')">Blog</button>
             </div>
 
             <!-- GitHub 项目区 -->
@@ -54,13 +58,19 @@
 
             <!-- 待定区 -->
             <div id="pending" class="tab-content" style="display: none;">
-                <p>与 ChatGPT 聊天吧！</p>
-                <div id="chat-box">
-                    <div id="chat-log"></div>
-                    <input type="text" id="user-input" placeholder="请输入消息...">
-                    <button onclick="sendMessage()">发送</button>
+                <h3>猜数字游戏</h3>
+                <p>系统会随机生成一个 1 到 100 的数字，试着猜猜看！</p>
+
+                <div id="game-container">
+                    <label for="user-guess">请输入一个数字：</label>
+                    <input type="number" id="user-guess" min="1" max="100">
+                    <button onclick="checkGuess()">猜</button>
+
+                    <p id="message"></p>
+                    <p id="attempts">尝试次数: 0</p>
                 </div>
             </div>
+
 
             <!-- Blog 区 -->
             <div id="blog" class="tab-content" style="display: none;">
@@ -81,4 +91,5 @@
         </div>
     </div>
 </body>
+
 </html>
