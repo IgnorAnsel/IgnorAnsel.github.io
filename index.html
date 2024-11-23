@@ -1,1 +1,84 @@
-<h1>test</h1>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IgnorAnsel 的个人网页</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // JavaScript 用于切换选项卡
+        function showTab(tabName) {
+            // 隐藏所有内容
+            var tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(function(tab) {
+                tab.style.display = 'none';
+            });
+
+            // 显示选中的内容
+            var activeTab = document.getElementById(tabName);
+            activeTab.style.display = 'block';
+
+            // 高亮当前选中的按钮
+            var buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(function(button) {
+                button.classList.remove('active');
+            });
+
+            var activeButton = document.querySelector(`[data-tab="${tabName}"]`);
+            activeButton.classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧个人信息 -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="https://github.com/IgnorAnsel.png" alt="GitHub头像">
+                <h2>IgnorAnsel</h2>
+                <p>软件开发者</p>
+            </div>
+            <div class="contact">
+                <h3>联系方式</h3>
+                <ul>
+                    <li>GitHub: <a href="https://github.com/IgnorAnsel" target="_blank">github.com/IgnorAnsel</a></li>
+                    <li>Email: your-email@example.com</li>
+                    <li>Twitter: <a href="https://twitter.com/your-twitter" target="_blank">@your-twitter</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 右侧项目和待定区域 -->
+        <div class="projects">
+            <h3>我的内容</h3>
+            <!-- 选项卡按钮 -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="github-projects" onclick="showTab('github-projects')">GitHub 项目</button>
+                <button class="tab-button" data-tab="pending" onclick="showTab('pending')">待定</button>
+            </div>
+
+            <!-- GitHub 项目区 -->
+            <div id="github-projects" class="tab-content" style="display: block;">
+                <div class="project-list">
+                    <div class="project-card">
+                        <h4>项目名称 1</h4>
+                        <p>项目描述 1</p>
+                        <a href="https://github.com/IgnorAnsel/project1" target="_blank">查看项目</a>
+                    </div>
+                    <div class="project-card">
+                        <h4>项目名称 2</h4>
+                        <p>项目描述 2</p>
+                        <a href="https://github.com/IgnorAnsel/project2" target="_blank">查看项目</a>
+                    </div>
+                    <!-- 可以继续添加更多项目 -->
+                </div>
+            </div>
+
+            <!-- 待定区 -->
+            <div id="pending" class="tab-content" style="display: none;">
+                <p>待定内容将在未来更新！敬请期待。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
