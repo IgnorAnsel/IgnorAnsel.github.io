@@ -33,6 +33,7 @@
             <div class="tabs">
                 <button class="tab-button active" data-tab="github-projects" onclick="showTab('github-projects')">GitHub 项目</button>
                 <button class="tab-button" data-tab="pending" onclick="showTab('pending')">待定</button>
+                <button class="tab-button" data-tab="blog" onclick="showTab('blog')">Blog</button> <!-- 新增按钮 -->
             </div>
 
             <!-- GitHub 项目区 -->
@@ -58,6 +59,23 @@
                     <div id="chat-log"></div>
                     <input type="text" id="user-input" placeholder="请输入消息...">
                     <button onclick="sendMessage()">发送</button>
+                </div>
+            </div>
+
+            <!-- Blog 区 -->
+            <div id="blog" class="tab-content" style="display: none;">
+                <p>欢迎访问我的博客！这是一些我的文章和分享：</p>
+                <div class="blog-posts">
+                    <div class="blog-post">
+                        <h4>如何学习 JavaScript</h4>
+                        <p>这篇文章介绍了我学习 JavaScript 的一些心得...</p>
+                        <a href="#">阅读全文</a>
+                    </div>
+                    <div class="blog-post">
+                        <h4>关于 Web 开发的未来</h4>
+                        <p>在这篇文章中，我讨论了 Web 开发的未来趋势...</p>
+                        <a href="#">阅读全文</a>
+                    </div>
                 </div>
             </div>
         </div>
