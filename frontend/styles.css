@@ -1,0 +1,68 @@
+/* 基本布局 */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 25%;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.projects {
+    width: 70%;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.tab-button {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+
+.tab-button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#chat-box {
+    margin-top: 20px;
+}
+
+#chat-log {
+    max-height: 300px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+
+.user-message {
+    color: blue;
+}
+
+.ai-message {
+    color: green;
+}
+
+#user-input {
+    width: 80%;
+    padding: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
