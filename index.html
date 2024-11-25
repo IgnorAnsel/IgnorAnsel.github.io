@@ -29,15 +29,15 @@
             </div>
         </div>
 
-        <!-- 右侧项目和待定区域 -->
+        <!-- 右侧项目和学习记录区域 -->
         <div class="projects">
             <h3>我的内容</h3>
             <!-- 选项卡按钮 -->
             <div class="tabs">
-                <button class="tab-button active" data-tab="github-projects" onclick="showTab('github-projects')">GitHub
-                    项目</button>
+                <button class="tab-button active" data-tab="github-projects" onclick="showTab('github-projects')">GitHub 项目</button>
                 <button class="tab-button" data-tab="pending" onclick="showTab('pending')">待定</button>
                 <button class="tab-button" data-tab="blog" onclick="showTab('blog')">Blog</button>
+                <button class="tab-button" data-tab="study" onclick="showTab('study')">学习记录</button>
             </div>
 
             <!-- GitHub 项目区 -->
@@ -56,6 +56,15 @@
                 </div>
             </div>
 
+            <!-- 学习记录区 -->
+            <div id="study" class="tab-content" style="display: none;">
+                <h3>学习记录</h3>
+                <ul>
+                    <li><a href="./Study/urdf/urdf_study.html" target="_blank">URDF 文件学习</a></li>
+                    <!-- 可以添加更多学习内容 -->
+                </ul>
+            </div>
+
             <!-- 待定区 -->
             <div id="pending" class="tab-content" style="display: none;">
                 <h3>猜数字游戏</h3>
@@ -70,7 +79,6 @@
                     <p id="attempts">尝试次数: 0</p>
                 </div>
             </div>
-
 
             <!-- Blog 区 -->
             <div id="blog" class="tab-content" style="display: none;">
