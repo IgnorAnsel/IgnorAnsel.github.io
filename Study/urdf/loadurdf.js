@@ -35,7 +35,8 @@ function createFileAccordion(fileList) {
             if (fileContent.textContent === '') {
                 fileContent.textContent = '加载中...';
                 try {
-                    const response = await fetch(`${fileName}`);
+                    // const response = await fetch(`${fileName}`);
+                    const response = await fetch(`test1.urdf`);
                     if (!response.ok) {
                         throw new Error(`无法加载文件内容：${response.status}`);
                     }
