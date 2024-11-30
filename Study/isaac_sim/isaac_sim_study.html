@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF样式导航栏</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 左侧导航栏 -->
+    <nav class="sidebar">
+      <a href="#section1">章节1</a>
+      <a href="#section2">章节2</a>
+      <a href="#section3">章节3</a>
+      <a href="#section4">章节4</a>
+    </nav>
+
+    <!-- 内容部分 -->
+    <div class="content">
+      <section id="section1">
+        <h2>章节1</h2>
+        <p>这里是章节1的内容。</p>
+      </section>
+      <section id="section2">
+        <h2>章节2</h2>
+        <p>这里是章节2的内容。</p>
+      </section>
+      <section id="section3">
+        <h2>章节3</h2>
+        <p>这里是章节3的内容。</p>
+      </section>
+      <section id="section4">
+        <h2>章节4</h2>
+        <p>这里是章节4的内容。</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // 平滑滚动效果
+    document.querySelectorAll('.sidebar a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
