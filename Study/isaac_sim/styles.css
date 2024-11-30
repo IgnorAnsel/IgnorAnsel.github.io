@@ -1,15 +1,13 @@
-/* 全局样式 */
+/* 样式文件 styles.css */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
   }
   
-  /* 容器布局 */
   .container {
     display: flex;
   }
   
-  /* 左侧导航栏样式 */
   .sidebar {
     width: 250px;
     height: 100vh;
@@ -46,26 +44,19 @@ body {
   .submenu {
     list-style: none;
     padding-left: 20px;
-    display: none; /* 默认隐藏子菜单 */
-  }
-  
-  .submenu-item {
-    margin-bottom: 10px;
+    display: none; /* 默认隐藏 */
   }
   
   .submenu a {
     text-decoration: none;
     color: #007bff;
     font-size: 0.9em;
-    display: block;
-    margin: 5px 0;
   }
   
   .submenu a:hover {
     text-decoration: underline;
   }
   
-  /* 内容区域样式 */
   .content {
     margin-left: 260px;
     padding: 20px;
@@ -73,16 +64,15 @@ body {
   }
   
   section {
-    height: 100vh;
     padding: 20px;
     border-bottom: 1px solid #eaeaea;
   }
   
-  h2 {
-    font-size: 2em;
+  h2, h3 {
+    margin: 0;
   }
   
-  p {
-    color: #666;
+  ul {
+    padding-left: 20px;
   }
   

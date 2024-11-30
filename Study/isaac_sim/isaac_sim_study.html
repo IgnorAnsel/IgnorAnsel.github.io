@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>多级目录导航栏</title>
+  <title>ROS2 Context 蓝图介绍</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,49 +12,69 @@
     <nav class="sidebar">
       <ul class="menu">
         <li class="menu-item">
-          <button class="toggle-btn">▶</button> 大目录1
+          <button class="toggle-btn">▶</button> 蓝图介绍
           <ul class="submenu">
             <li class="submenu-item">
-              <button class="toggle-btn">▶</button> 中目录1
+              <a href="#ros2-context">1. ROS2 Context</a>
               <ul class="submenu">
-                <li><a href="#section1-1">小目录1-1</a></li>
-                <li><a href="#section1-2">小目录1-2</a></li>
+                <li><a href="#input-parameters">1.1 输入参数</a></li>
+                <li class="submenu-item">
+                  <button class="toggle-btn">▶</button> 1.1.1 详细说明
+                  <ul class="submenu">
+                    <li><a href="#domain-id">1.1.1 domain_id</a></li>
+                    <li><a href="#usedomainidenvvar">1.1.2 useDomainIDEnvVar</a></li>
+                  </ul>
+                </li>
+                <li><a href="#output-parameters">1.2 输出参数</a></li>
               </ul>
             </li>
-            <li><a href="#section1-3">中目录2</a></li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <button class="toggle-btn">▶</button> 大目录2
-          <ul class="submenu">
-            <li><a href="#section2-1">中目录1</a></li>
-            <li><a href="#section2-2">中目录2</a></li>
+            <li><a href="#pitfalls">2. 踩过的坑</a></li>
           </ul>
         </li>
       </ul>
     </nav>
 
-    <!-- 内容部分 -->
+    <!-- 内容区域 -->
     <div class="content">
-      <section id="section1-1">
-        <h2>小目录1-1</h2>
-        <p>这里是小目录1-1的内容。</p>
+      <section id="ros2-context">
+        <h2>1. ROS2 Context</h2>
+        <p>ROS2 Context 是一个用于配置和管理 ROS2 节点上下文的工具，其主要作用是设置运行环境，使得 ROS2 节点可以运行在指定的域内。</p>
       </section>
-      <section id="section1-2">
-        <h2>小目录1-2</h2>
-        <p>这里是小目录1-2的内容。</p>
+
+      <section id="input-parameters">
+        <h2>1.1 输入参数</h2>
+        <p>ROS2 Context 的输入参数包括以下内容：</p>
       </section>
-      <section id="section1-3">
-        <h2>中目录2</h2>
-        <p>这里是中目录2的内容。</p>
+
+      <section id="domain-id">
+        <h3>1.1.1 domain_id</h3>
+        <p>
+          <strong>作用：</strong> 指定 ROS2 节点运行的域 ID。<br>
+          <strong>说明：</strong> 域 ID 是 ROS2 中用于划分节点运行区域的标识，只有运行在同一域内的节点才能进行通信。<br>
+          <strong>典型值：</strong> 根据需求设置，常见为 0 或特定的网络配置值。
+        </p>
       </section>
-      <section id="section2-1">
-        <h2>中目录1</h2>
-        <p>这里是中目录1的内容。</p>
+
+      <section id="usedomainidenvvar">
+        <h3>1.1.2 useDomainIDEnvVar</h3>
+        <p>
+          <strong>作用：</strong> 决定是否使用环境变量中的域 ID。<br>
+          <strong>说明：</strong> 如果设置为 True，则会优先使用环境变量中的 domain_id 值，确保与其他实例一致。
+        </p>
       </section>
-      <section id="section2-2">
-        <h2>中目录2</h2>
-        <p>这里是中目录2的内容。</p>
+
+      <section id="output-parameters">
+        <h2>1.2 输出参数</h2>
+        <p>ROS2 Context 的输出参数是：</p>
+        <p><strong>context:</strong> 分配给 ROS2 上下文的唯一标识符。</p>
+      </section>
+
+      <section id="pitfalls">
+        <h2>2. 踩过的坑</h2>
+        <ul>
+          <li>未正确配置 <code>domain_id</code> 导致节点通信失败。</li>
+          <li>未勾选 <code>useDomainIDEnvVar</code> 导致参数冲突。</li>
+        </ul>
       </section>
     </div>
   </div>
