@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROS2 Context 蓝图介绍</title>
+  <title>蓝图介绍</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,10 +12,10 @@
     <nav class="sidebar">
       <ul class="menu">
         <li class="menu-item">
-          <button class="toggle-btn">▶</button> 蓝图介绍
+          <button class="toggle-btn">▶</button> 一、蓝图介绍
           <ul class="submenu">
             <li class="submenu-item">
-              <a href="#ros2-context">1. ROS2 Context</a>
+              <button class="toggle-btn">▶</button> 1. ROS2 Context
               <ul class="submenu">
                 <li><a href="#input-parameters">1.1 输入参数</a></li>
                 <li class="submenu-item">
@@ -28,53 +28,82 @@
                 <li><a href="#output-parameters">1.2 输出参数</a></li>
               </ul>
             </li>
-            <li><a href="#pitfalls">2. 踩过的坑</a></li>
+            <li class="submenu-item">
+              <button class="toggle-btn">▶</button> 2. on_playback_tick
+              <ul class="submenu">
+                <li><a href="#on-playback-output">2.1 输出参数</a></li>
+                <li class="submenu-item">
+                  <button class="toggle-btn">▶</button> 2.1.1 详细说明
+                  <ul class="submenu">
+                    <li><a href="#delta-seconds">2.1.1 Delta Seconds</a></li>
+                    <li><a href="#frame">2.1.2 Frame</a></li>
+                    <li><a href="#time">2.1.3 Time</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
           </ul>
         </li>
+        <li><a href="#pitfalls">二、踩过的坑</a></li>
       </ul>
     </nav>
 
-    <!-- 内容区域 -->
+    <!-- 内容部分 -->
     <div class="content">
       <section id="ros2-context">
         <h2>1. ROS2 Context</h2>
-        <p>ROS2 Context 是一个用于配置和管理 ROS2 节点上下文的工具，其主要作用是设置运行环境，使得 ROS2 节点可以运行在指定的域内。</p>
+        <p>ROS2 Context 是一个用于配置和管理 ROS2 节点上下文的工具。</p>
       </section>
 
       <section id="input-parameters">
-        <h2>1.1 输入参数</h2>
+        <h3>1.1 输入参数</h3>
         <p>ROS2 Context 的输入参数包括以下内容：</p>
       </section>
 
       <section id="domain-id">
-        <h3>1.1.1 domain_id</h3>
+        <h4>1.1.1 domain_id (uchar)</h4>
         <p>
           <strong>作用：</strong> 指定 ROS2 节点运行的域 ID。<br>
-          <strong>说明：</strong> 域 ID 是 ROS2 中用于划分节点运行区域的标识，只有运行在同一域内的节点才能进行通信。<br>
-          <strong>典型值：</strong> 根据需求设置，常见为 0 或特定的网络配置值。
+          <strong>说明：</strong> 域 ID 是 ROS2 中用于划分节点运行区域的标识，只有运行在同一域内的节点才能进行通信。
         </p>
       </section>
 
       <section id="usedomainidenvvar">
-        <h3>1.1.2 useDomainIDEnvVar</h3>
+        <h4>1.1.2 useDomainIDEnvVar (bool)</h4>
         <p>
-          <strong>作用：</strong> 决定是否使用环境变量中的域 ID。<br>
-          <strong>说明：</strong> 如果设置为 True，则会优先使用环境变量中的 domain_id 值，确保与其他实例一致。
+          <strong>作用：</strong> 决定是否使用当前实例的域 ID。<br>
+          <strong>说明：</strong> 如果设置为 True，则会优先使用当前实例的域 ID。
         </p>
       </section>
 
       <section id="output-parameters">
-        <h2>1.2 输出参数</h2>
-        <p>ROS2 Context 的输出参数是：</p>
+        <h3>1.2 输出参数</h3>
         <p><strong>context:</strong> 分配给 ROS2 上下文的唯一标识符。</p>
       </section>
 
+      <section id="on-playback-output">
+        <h3>2. on_playback_tick</h3>
+        <p>on_playback_tick 的输出参数包括以下内容：</p>
+      </section>
+
+      <section id="delta-seconds">
+        <h4>2.1.1 Delta Seconds (double)</h4>
+        <p><strong>作用：</strong> 流程更新。</p>
+      </section>
+
+      <section id="frame">
+        <h4>2.1.2 Frame (double)</h4>
+        <p><strong>作用：</strong> 场景中的全局播放时间。</p>
+      </section>
+
+      <section id="time">
+        <h4>2.1.3 Time (double)</h4>
+        <p><strong>作用：</strong> 全局播放时间（单位：秒）。</p>
+      </section>
+
       <section id="pitfalls">
-        <h2>2. 踩过的坑</h2>
-        <ul>
-          <li>未正确配置 <code>domain_id</code> 导致节点通信失败。</li>
-          <li>未勾选 <code>useDomainIDEnvVar</code> 导致参数冲突。</li>
-        </ul>
+        <h2>二、踩过的坑</h2>
+        <p>暂无。</p>
       </section>
     </div>
   </div>
