@@ -11,56 +11,78 @@ body {
   
   /* 左侧导航栏样式 */
   .sidebar {
-    width: 200px;
+    width: 250px;
     height: 100vh;
     background-color: #f8f9fa;
-    padding: 20px;
+    padding: 10px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     position: fixed;
+    overflow-y: auto;
   }
   
-  .sidebar a {
-    display: block;
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-item > .toggle-btn {
+    background: none;
+    border: none;
     color: #333;
-    text-decoration: none;
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 5px;
   }
   
-  .sidebar a:hover {
-    background-color: #007bff;
-    color: #fff;
+  .menu-item > .toggle-btn:focus {
+    outline: none;
+  }
+  
+  .menu-item {
+    margin-bottom: 10px;
+  }
+  
+  .submenu {
+    list-style: none;
+    padding-left: 20px;
+    display: none; /* 默认隐藏子菜单 */
+  }
+  
+  .submenu-item {
+    margin-bottom: 10px;
+  }
+  
+  .submenu a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 0.9em;
+    display: block;
+    margin: 5px 0;
+  }
+  
+  .submenu a:hover {
+    text-decoration: underline;
   }
   
   /* 内容区域样式 */
   .content {
-    margin-left: 220px;
+    margin-left: 260px;
     padding: 20px;
-    width: calc(100% - 220px);
+    width: calc(100% - 260px);
   }
   
-  /* 每个章节样式 */
   section {
     height: 100vh;
     padding: 20px;
     border-bottom: 1px solid #eaeaea;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
   }
   
-  section h2 {
+  h2 {
     font-size: 2em;
-    margin: 0;
   }
   
-  section p {
-    font-size: 1em;
+  p {
     color: #666;
-    margin-top: 10px;
   }
   
