@@ -58,7 +58,7 @@
 
     <!-- Content area to display markdown content -->
     <div id="content">
-        <h2>请选择一个文件查看</h2>
+        <h2 id="default-message">请选择一个文件查看</h2>
         <div id="file-content"></div>
     </div>
 
@@ -82,6 +82,12 @@
 
         // 根据路径加载和渲染 Markdown 文件
         function loadMarkdown(filePath) {
+            // 移除默认的提示信息
+            const defaultMessage = document.getElementById('default-message');
+            if (defaultMessage) {
+                defaultMessage.style.display = 'none';  // 隐藏提示信息
+            }
+
             const baseUrl = "https://ignoransel.github.io/Study/pcl2/";
             const fullUrl = new URL(filePath, baseUrl).href;  // 自动处理路径拼接
             fetch(fullUrl)
