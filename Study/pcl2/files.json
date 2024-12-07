@@ -7,6 +7,26 @@
     {
       "name": "安装教程",
       "path": "log/install_blog/install_blog.md"
+    },
+    {
+      "name": "1.PCD文件格式",
+      "path": "log/begin_pcl2/PCD.md"
+    },
+    {
+      "name": "2.PCL输入输出",
+      "path": "log/begin_pcl2/input_output.md"
+    },
+    {
+      "name": "3.Point类型",
+      "path": "log/begin_pcl2/PointType.md"
+    },
+    {
+      "name": "4.KDTree",
+      "path": "log/begin_pcl2/KDTree.md"
+    },
+    {
+      "name": "5.点云可视化",
+      "path": "log/begin_pcl2/PCLVisualizer.md"
     }
   ]
 }
