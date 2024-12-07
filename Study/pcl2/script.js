@@ -1,5 +1,4 @@
-// GitHub repository URL
-const repoUrl = 'https://github.com/IgnorAnsel/IgnorAnsel.github.io/'; // 替换为你的 GitHub 仓库 URL
+// 使用相对路径来访问本地的 Markdown 文件
 const jsonFilePath = 'files.json'; // JSON 文件路径
 
 // 加载 JSON 文件，获取 Markdown 文件列表
@@ -21,8 +20,7 @@ fetch(jsonFilePath)
 
 // 根据路径加载和渲染 Markdown 文件
 function loadMarkdown(filePath) {
-    const fileUrl = repoUrl + filePath;
-    fetch(fileUrl)
+    fetch(filePath) // 直接通过相对路径访问本地文件
         .then(response => response.text())
         .then(markdownContent => {
             const htmlContent = marked(markdownContent);  // 使用 marked 库将 Markdown 转换为 HTML
