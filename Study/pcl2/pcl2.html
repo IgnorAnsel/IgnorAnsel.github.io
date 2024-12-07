@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown Viewer</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- 引入 marked -->
+    
+    <!-- 引入 marked -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- 引入 highlight.js 样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js/styles/default.min.css">
+    
+    <!-- 引入 highlight.js 脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/highlight.js"></script>
 </head>
 <body>
     <ul id="file-list"></ul>
@@ -35,8 +43,12 @@
             fetch(fullUrl)
                 .then(response => response.text())
                 .then(markdownContent => {
-                    const htmlContent = marked.parse(markdownContent);  // 使用新的 API
+                    // 使用 marked 将 Markdown 转换为 HTML
+                    const htmlContent = marked.parse(markdownContent);
                     document.getElementById('file-content').innerHTML = htmlContent;
+                    
+                    // 使用 highlight.js 处理代码块高亮
+                    hljs.highlightAll();  // 自动高亮所有代码块
                 })
                 .catch(error => {
                     console.error('加载 Markdown 文件时出错:', error);
