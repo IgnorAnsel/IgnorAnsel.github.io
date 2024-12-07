@@ -1,12 +1,12 @@
 {
-    "files": [
-      {
-        "name": "blog_template.md",
-        "path": "./log/blog_template.md"
-      },
-      {
-        "name": "install_blog.md",
-        "path": ".log/install_blog/install_blog.md"
-      }
-    ]
+  "files": [
+    {
+      "name": "blog_template.md",
+      "path": "./Study/pcl2/log/blog_template.md"
+    },
+    {
+      "name": "install_blog.md",
+      "path": "./Study/pcl2/log/install_blog/install_blog.md"
+    }
+  ]
 }
