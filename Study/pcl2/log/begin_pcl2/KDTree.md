@@ -33,7 +33,7 @@ FLANN进行快速搜索的一些相关子类与包装类。具体可以参考相
  pcl::search::KdTree<PointT> 是 pcl::search::Search< PointT > 的子
 类，是 pcl::KdTree<PointT> 的包装类。包含(1) k 近邻搜索；(2) 邻域半径搜
 索。
- ```C++
+ ```CPP
 #include <iostream>
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>
@@ -81,7 +81,7 @@ int main(int argc, char** argv)
  ### 2.3 pcl::KdTreeFLANN < PointT >
  pcl::KdTreeFLANN<PointT> 是 pcl::KdTree<PointT> 的包装类，是FLANN（Fast
 Library for Approximate Nearest Neighbors）的包装类。包含(1) k 近邻搜索；(2) 邻域半径搜索。
- ```C++
+ ```CPP
 #include <iostream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>

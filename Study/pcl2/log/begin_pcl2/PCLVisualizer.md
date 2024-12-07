@@ -4,13 +4,13 @@
 
 ### 1.简介
 
-PCLVisualizer是PCL中一个非常重要的可视化工具，它是一个基于Qt的C++类，可以用于显示点云、网格、法线、颜色、深度图等数据。PCLVisualizer可以用于调试和可视化点云处理算法，也可以用于展示点云数据。
+PCLVisualizer是PCL中一个非常重要的可视化工具，它是一个基于Qt的CPP类，可以用于显示点云、网格、法线、颜色、深度图等数据。PCLVisualizer可以用于调试和可视化点云处理算法，也可以用于展示点云数据。
 
 ### 2.使用方法
 
 #### 2.1.创建PCLVisualizer对象
 
-```c++
+```CPP
 #include <pcl/visualization/pcl_visualizer.h>
 
 pcl::visualization::PCLVisualizer viewer("3D Viewer");
@@ -18,7 +18,7 @@ pcl::visualization::PCLVisualizer viewer("3D Viewer");
 
 #### 2.2.添加点云数据
 
-```c++
+```CPP
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>
 
@@ -30,11 +30,11 @@ viewer.addPointCloud(cloud, "cloud");
 
 #### 2.3.设置颜色
 
-```c++
+```CPP
 viewer.setBackgroundColor(0.0, 0.0, 0.0); // 设置背景颜色，默认为黑色
 ```
 
-```c++
+```CPP
 // 设置点云颜色
 viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 1.0, 0.0, 0.0, "cloud"); // rgb
 pcl::visualization::PointCloudColorHandlerCustom<PointT> red(cloud, 255, 0, 0); // rgb 将点云设置颜色，默认白色
@@ -43,13 +43,13 @@ viewer.addPointCloud(cloud, red, "cloud");
 ```
 #### 2.4.设置相机位置
 
-```c++
+```CPP
 viewer.setCameraPosition(0, 0, -2, 0, -1, 0); // 设置相机位置和方向，默认为(0, 0, 0, 0, 0, 1)
 ```
 
 #### 2.5.显示窗口（两种方式）
 
-```c++
+```CPP
 while (!viewer.wasStopped()) // 非阻塞显示
 {
     viewer.spinOnce();
@@ -58,34 +58,34 @@ while (!viewer.wasStopped()) // 非阻塞显示
 }
 ```
 
-```c++
+```CPP
 viewer.spin(); // 阻塞显示
 ```
 #### 2.6 设置点云大小
 
-```c++
+```CPP
 viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "cloud"); // 设置点云大小，默认为1
 ```
 #### 2.7.添加线段
 
-```c++
+```CPP
 pcl::PointXYZ p1(0, 0, 0);
 pcl::PointXYZ p2(1, 1, 1);
 viewer.addLine(p1, p2, "line");
 ```
 #### 2.8.添加框
 
-```c++
+```CPP
 viewer.addCube(0, 1, 0, 1, 0, 1, 1, 1, 1, "cube");
 ```
 #### 2.9.添加文本
 
-```c++
+```CPP
 viewer.addText("Hello, PCL!", 10, 10, "text");
 ```
 #### 2.10.添加图像
 
-```c++
+```CPP
 cv::Mat image = cv::imread("image.jpg", cv::IMREAD_COLOR);
 viewer.addImage(image, "image");
 ```
@@ -93,7 +93,7 @@ viewer.addImage(image, "image");
 
 ## 完整代码
 
-```c++
+```CPP
 #include <iostream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
@@ -146,7 +146,7 @@ int main(int argc, char** argv)
 
 # 超完整代码，可供学习参考
 [来源链接(官方)](https://pcl.readthedocs.io/projects/tutorials/en/latest/pcl_visualizer.html#pcl-visualizer)
-```c++
+```CPP
 #include<iostream>
 #include<thread>
  

@@ -1,5 +1,5 @@
 @[2.PCL输入输出](这里写自定义目录标题)
-``` C++
+``` CPP
 #include <pcl/io/pcd_io.h> // PCL 库中用于读写 PCD 文件的头文件
 #include <pcl/point_types.h> // PCL 库中定义点类型（如 PointXYZ）的头文件
 #include <iostream>

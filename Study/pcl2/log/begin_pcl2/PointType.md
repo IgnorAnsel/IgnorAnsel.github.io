@@ -3,7 +3,7 @@
 
 ## 1. PointXYZ
 
-```c++
+```CPP
 template<typename PointT>
 struct PointXYZ
 {
@@ -13,7 +13,7 @@ struct PointXYZ
 };
 ```
 ## 2. PointXYZI
-```c++
+```CPP
 template<typename PointT>
 struct PointXYZI
 {
@@ -25,7 +25,7 @@ struct PointXYZI
 ```
 ## 3. PointXYZRGB
 
-```c++
+```CPP
 template<typename PointT>
 struct PointXYZRGB
 {
@@ -39,7 +39,7 @@ struct PointXYZRGB
 ```
 ## 4. PointXYZRGBA
 
-```c++
+```CPP
 template<typename PointT>
 struct PointXYZRGBA
 {
@@ -54,7 +54,7 @@ struct PointXYZRGBA
 ```
 ## 5. PointXYZRGBNormal
 
-```c++
+```CPP
 template<typename PointT>
 struct PointXYZRGBNormal
 {
@@ -72,7 +72,7 @@ struct PointXYZRGBNormal
 ```
 ## 6. PointXYZINormal
 
-```c++
+```CPP
 template<typename PointT>
 struct PointXYZINormal
 {
@@ -87,7 +87,7 @@ struct PointXYZINormal
 };
 ```
 ## 7. PointXY
-```c++
+```CPP
 template<typename PointT>
 struct PointXY
 {
@@ -98,7 +98,7 @@ struct PointXY
 
 ## 8. Normal
 
-```c++
+```CPP
 template<typename PointT>
 struct Normal
 {
@@ -112,7 +112,7 @@ struct Normal
 
 ## 9. PointWithRange
 
-```c++
+```CPP
 template<typename PointT>
 struct PointWithRange
 {
@@ -125,7 +125,7 @@ struct PointWithRange
 
 ## 10. PointWithViewpoint
 
-```c++
+```CPP
 template<typename PointT>
 struct PointWithViewpoint
 {
