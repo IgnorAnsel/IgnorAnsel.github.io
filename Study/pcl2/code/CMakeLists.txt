@@ -14,8 +14,12 @@ add_executable(point_type src/point_type.cpp)
 add_executable(kdsearch src/kdsearch.cpp)
 add_executable(kdsearch_flann src/kdsearchflann.cpp)
 add_executable(PCLVisualizer src/PCLVisualizer.cpp)
+add_executable(filter_US src/filter_uniformsampling.cpp)
+add_executable(filter_VG src/filter_voxelgrid.cpp)
+add_executable(bilateralFilter src/bilateralFilter.cpp)
 # 将所有可执行文件放入列表中
-set(EXECUTABLES pcl_test input_output_test point_type kdsearch kdsearch_flann PCLVisualizer)
+set(EXECUTABLES pcl_test input_output_test point_type kdsearch kdsearch_flann 
+PCLVisualizer filter_US filter_VG bilateralFilter)
 
 # 链接 PCL 库和包含目录到每个可执行文件
 foreach(exe ${EXECUTABLES})

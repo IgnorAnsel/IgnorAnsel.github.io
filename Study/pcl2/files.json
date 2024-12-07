@@ -27,6 +27,10 @@
     {
       "name": "5_点云可视化",
       "path": "log/begin_pcl2/PCLVisualizer.md"
+    },
+    {
+      "name": "6_点云滤波",
+      "path": "log/begin_pcl2/filter.md"
     }
   ]
 }

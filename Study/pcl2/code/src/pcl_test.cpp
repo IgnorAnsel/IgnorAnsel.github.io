@@ -6,8 +6,8 @@
 
 int main()
 {
-    // 创建一个点云对象
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+    // 创建一个点云对象，使用带有强度信息的 PointXYZI 类型
+    pcl::PointCloud<pcl::PointXYZI>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZI>);
 
     // 设置点云的尺寸
     int num_points = 1000; // 生成1000个点
@@ -20,22 +20,25 @@ int main()
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<float> dis(-10.0f, 10.0f); // 随机生成范围[-10, 10]
+    std::uniform_real_distribution<float> intensity_dis(0.0f, 255.0f); // 随机生成强度值，范围[0, 255]
 
-    // 随机生成点
+    // 随机生成点及其强度值
     for (size_t i = 0; i < cloud->points.size(); ++i)
     {
         cloud->points[i].x = dis(gen);
         cloud->points[i].y = dis(gen);
         cloud->points[i].z = dis(gen);
+        cloud->points[i].intensity = intensity_dis(gen); // 给每个点随机赋予一个强度值
     }
 
-    std::cout << "Generated " << cloud->width * cloud->height << " random points." << std::endl;
-
+    std::cout << "Generated " << cloud->width * cloud->height << " random points with intensity." << std::endl;
+    // 保存生成的点云
+    pcl::io::savePCDFileASCII("random_cloud.pcd", *cloud);
     // 创建一个体素网格滤波器对象，进行降采样
-    pcl::VoxelGrid<pcl::PointXYZ> sor;
+    pcl::VoxelGrid<pcl::PointXYZI> sor; // 使用带强度信息的滤波器
     sor.setInputCloud(cloud);
     sor.setLeafSize(0.5f, 0.5f, 0.5f);  // 设置体素大小
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>());
+    pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZI>());
     sor.filter(*cloud_filtered);  // 对点云进行滤波
 
     std::cout << "PointCloud after filtering has: " << cloud_filtered->width * cloud_filtered->height << " data points." << std::endl;
