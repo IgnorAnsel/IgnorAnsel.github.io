@@ -5,10 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown Viewer</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- 引入 marked -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Left sidebar */
+        #sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #ddd;
+        }
+
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #sidebar li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #sidebar li:hover {
+            background-color: #ddd;
+        }
+
+        /* Right content area */
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        #content h1 {
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <ul id="file-list"></ul>
-    <div id="file-content"></div>
+    <!-- Sidebar for file list -->
+    <div id="sidebar">
+        <h3>文件目录</h3>
+        <ul id="file-list"></ul>
+    </div>
+
+    <!-- Content area to display markdown content -->
+    <div id="content">
+        <h2>请选择一个文件查看</h2>
+        <div id="file-content"></div>
+    </div>
 
     <script>
         // 加载 JSON 文件，获取 Markdown 文件列表
