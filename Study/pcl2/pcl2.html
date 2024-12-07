@@ -4,30 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown Viewer</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- 引入 marked 库 -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .file-list {
-            list-style-type: none;
-        }
-        .file-list li {
-            margin: 5px 0;
-            cursor: pointer;
-            color: blue;
-        }
-        #file-content {
-            margin-top: 20px;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- 引入 marked -->
 </head>
 <body>
-    <h1>Markdown 文件列表</h1>
-    <ul id="file-list" class="file-list"></ul>
+    <ul id="file-list"></ul>
     <div id="file-content"></div>
 
-    <!-- 引入外部 JavaScript 文件 -->
-    <script src="script.js"></script>
+    <script>
+        // 加载 JSON 文件，获取 Markdown 文件列表
+        fetch('files.json')  // 直接通过相对路径加载 JSON 文件
+            .then(response => response.json())
+            .then(data => {
+                const fileListElement = document.getElementById('file-list');
+                data.files.forEach(file => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = file.name;
+                    listItem.onclick = () => loadMarkdown(file.path);  // 加载 Markdown 文件
+                    fileListElement.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('加载 JSON 文件时出错:', error);
+                document.getElementById('file-list').innerHTML = '<p>无法加载文件列表。</p>';
+            });
+
+        // 根据路径加载和渲染 Markdown 文件
+        function loadMarkdown(filePath) {
+            const baseUrl = "https://ignoransel.github.io/Study/pcl2/";
+            const fullUrl = new URL(filePath, baseUrl).href;  // 自动处理路径拼接
+            fetch(fullUrl)
+                .then(response => response.text())
+                .then(markdownContent => {
+                    const htmlContent = marked.parse(markdownContent);  // 使用新的 API
+                    document.getElementById('file-content').innerHTML = htmlContent;
+                })
+                .catch(error => {
+                    console.error('加载 Markdown 文件时出错:', error);
+                    document.getElementById('file-content').innerHTML = '<p>无法加载文件内容。</p>';
+                });
+        }
+    </script>
 </body>
 </html>
