@@ -17,7 +17,7 @@ fetch('files.json')  // 直接通过相对路径加载 JSON 文件
 
 // 根据路径加载和渲染 Markdown 文件
 function loadMarkdown(filePath) {
-    fetch(filePath)  // 使用相对路径直接加载文件
+    fetch("https://ignoransel.github.io/Study/pcl2/"+filePath)  // 使用相对路径直接加载文件
         .then(response => response.text())
         .then(markdownContent => {
             const htmlContent = marked(markdownContent);  // 使用 marked 将 Markdown 转换为 HTML
