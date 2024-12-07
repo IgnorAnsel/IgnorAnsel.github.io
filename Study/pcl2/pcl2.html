@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown Viewer</title>
+    
+    <!-- 引入本地 Prism 核心文件和样式 -->
+    <link href="https://ignoransel.github.io/libs/prism/prism.css" rel="stylesheet" />
+    <script src="https://ignoransel.github.io/libs/prism/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- 引入 marked -->
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -93,8 +98,13 @@
             fetch(fullUrl)
                 .then(response => response.text())
                 .then(markdownContent => {
+                    // 解析 Markdown 内容
                     const htmlContent = marked.parse(markdownContent);  // 使用新的 API
-                    document.getElementById('file-content').innerHTML = htmlContent;
+                    const contentElement = document.getElementById('file-content');
+                    contentElement.innerHTML = htmlContent;
+
+                    // 语法高亮处理代码块
+                    Prism.highlightAll(); // 语法高亮
                 })
                 .catch(error => {
                     console.error('加载 Markdown 文件时出错:', error);
