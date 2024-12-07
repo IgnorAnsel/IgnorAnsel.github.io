@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Viewer</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- 引入 marked 库 -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .file-list {
+            list-style-type: none;
+        }
+        .file-list li {
+            margin: 5px 0;
+            cursor: pointer;
+            color: blue;
+        }
+        #file-content {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Markdown 文件列表</h1>
+    <ul id="file-list" class="file-list"></ul>
+    <div id="file-content"></div>
+
+    <!-- 引入外部 JavaScript 文件 -->
+    <script src="script.js"></script>
+</body>
+</html>

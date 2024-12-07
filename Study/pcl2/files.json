@@ -1,0 +1,13 @@
+{
+    "files": [
+      {
+        "name": "blog_template.md",
+        "path": "log/blog_template.md"
+      },
+      {
+        "name": "install_blog.md",
+        "path": "log/install_blog/install_blog.md"
+      }
+    ]
+  }
+  
