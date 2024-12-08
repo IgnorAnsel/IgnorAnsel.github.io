@@ -105,7 +105,7 @@ typedef pcl::PointXYZ PointT;
 typedef pcl::PointNormal PointNT; // 使用 PointNormal，这样可以显示法向量
 
 ```
-更加具体可见[3.PCL点云数据类型](./PointType.md)
+更加具体可见[3.PCL点云数据类型](.log/begin_pcl2/PointType.md)
 
 #### 2.2.3 加载点云数据
 
