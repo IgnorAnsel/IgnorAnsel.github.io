@@ -31,6 +31,10 @@
     {
       "name": "6_点云滤波",
       "path": "log/begin_pcl2/filter.md"
+    },
+    {
+      "name": "7_表面法线",
+      "path": "log/begin_pcl2/faceNormal.md"
     }
   ]
 }

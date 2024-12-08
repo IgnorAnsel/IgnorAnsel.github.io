@@ -16,5 +16,6 @@
             "command": "extension.execute",
             "priority": 4
         }
-    ]
+    ],
+    "cmake.sourceDirectory": "/home/ansel/IgnorAnsel.github.io/Study/pcl2/code"
 }
