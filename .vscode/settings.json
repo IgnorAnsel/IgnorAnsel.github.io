@@ -17,5 +17,12 @@
             "priority": 4
         }
     ],
-    "cmake.sourceDirectory": "/home/ansel/IgnorAnsel.github.io/Study/pcl2/code"
+    "cmake.sourceDirectory": "/home/ansel/IgnorAnsel.github.io/Study/pcl2/code",
+    "files.associations": {
+        "array": "cpp",
+        "bitset": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp"
+    }
 }

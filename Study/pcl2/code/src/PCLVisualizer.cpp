@@ -1,5 +1,6 @@
 #include <iostream>
 #include <pcl/io/pcd_io.h>
+#include <pcl/io/ply_io.h>
 #include <pcl/point_types.h>
 #include <thread>  // For std::this_thread
 #include <chrono>  // For std::chrono
@@ -13,7 +14,7 @@ int main(int argc, char** argv)
     pcl::PointCloud<PointT>::Ptr cloud(new pcl::PointCloud<PointT>);
 
     // 读取点云数据
-    if (pcl::io::loadPCDFile<pcl::PointXYZ>(argv[1], *cloud) == -1)
+    if (pcl::io::loadPLYFile<pcl::PointXYZ>(argv[1], *cloud) == -1)
     {
         PCL_ERROR("Couldn't read file bunny.pcd \n");
         return (-1);
