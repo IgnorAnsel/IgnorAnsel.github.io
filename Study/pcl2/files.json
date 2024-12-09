@@ -35,6 +35,10 @@
     {
       "name": "7_表面法线",
       "path": "log/begin_pcl2/faceNormal.md"
+    },
+    {
+      "name": "8_提取关键点",
+      "path": "log/begin_pcl2/KeyPoint.md"
     }
   ]
 }
