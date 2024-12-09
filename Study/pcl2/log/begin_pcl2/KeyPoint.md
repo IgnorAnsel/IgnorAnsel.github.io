@@ -69,14 +69,14 @@ Harris角点检测是一种用于二维图像中的角点检测算法。它通�
 
 ### 2.2 参数
 
-- `threshold`：设置Harris角点检测中的阈值。这个值用来确定哪些点被认为是关键点，通常是角点的响应函数值。只有大于该阈值的点才会被认为是一个关键点。
-- `radius`：设置搜索邻域的半径。用于计算每个点的响应函数，邻域内的点用于计算Harris矩阵。较大的值通常会导致更多的关键点。
-- `non_max_suppression`：是否启用非最大抑制。在提取关键点时，如果一个点周围的点具有更大的响应值，则该点会被抑制。启用后，只有局部最大值才会被保留。
-- `k`：Harris角点检测算法中的一个常数参数，通常为0.04。它与计算特征响应的矩阵有关。这个值影响角点响应的灵敏度，较高的值可能会导致较少的关键点。
-- `edge_threshold`：用于边缘检测的阈值。该参数帮助检测点云中的边缘，避免在边缘处提取关键点。如果点云中的响应值低于此值，则被认为是边缘。
-- `min_neighbors`：用于非最大抑制的参数。在非最大抑制过程中，该参数定义了每个关键点周围需要考虑的最小邻居数量。较小的值会保留更多关键点。
+- `threshold`：设置Harris角点检测中的阈值。这个值用来确定哪些点被认为是关键点，通常是角点的响应函数值。只有大于该阈值的点才会被认为是一个关键点。(0.0)
+- `radius`：设置搜索邻域的半径。用于计算每个点的响应函数，邻域内的点用于计算Harris矩阵。较大的值通常会导致更多的关键点。（0.01）
+- `non_max_suppression`：是否启用非最大抑制。在提取关键点时，如果一个点周围的点具有更大的响应值，则该点会被抑制。启用后，只有局部最大值才会被保留。(true)
+- `k`：Harris角点检测算法中的一个常数参数，通常为0.04。它与计算特征响应的矩阵有关。这个值影响角点响应的灵敏度，较高的值可能会导致较少的关键点。(0.04)
+- `edge_threshold`：用于边缘检测的阈值。该参数帮助检测点云中的边缘，避免在边缘处提取关键点。如果点云中的响应值低于此值，则被认为是边缘。(0.0)
+- `min_neighbors`：用于非最大抑制的参数。在非最大抑制过程中，该参数定义了每个关键点周围需要考虑的最小邻居数量。较小的值会保留更多关键点。(0.0)
 - `search_method`：设置搜索方法（例如 pcl::search::KdTree<PointT>），用来在邻域内查找点。它通常用于加速点云内邻域搜索。
-- `use_normal`：是否使用点云的法线信息来计算Harris响应。启用该选项可以使角点检测更加稳定，尤其是在处理不规则的点云时。
+- `use_normal`：是否使用点云的法线信息来计算Harris响应。启用该选项可以使角点检测更加稳定，尤其是在处理不规则的点云时。(false)
 
 ### 2.3 代码
 
@@ -115,3 +115,97 @@ int main(int argc, char** argv)
     return 0;
 }
 ```
+
+## 3.SIFTKeypoint
+
+### 3.1 简介
+
+SIFT（Scale-Invariant Feature Transform）是一种用于图像和点云中的关键点检测和描述子的算法。它能够检测图像中的局部特征，并生成具有尺度不变性的特征描述子。SIFT算法的主要优点是它能够处理不同尺度和旋转的图像，并且具有较高的鲁棒性。
+
+### 3.2 参数
+- `min_scale`：定义了尺度空间的最小尺度。这个值决定了特征检测时尺度的下限。通常，它影响算法在多大尺度下开始寻找特征点。(0.01)
+- `n_octaves`：设置尺度空间的八度数（Octaves）。八度数决定了图像或点云的不同尺度级别。在 n_octaves 范围内，算法会计算不同的尺度特征。(4)
+- `n_scales_per_octave`：每个八度（Octave）中的尺度数。增加该值会使算法计算更多的尺度，这可能增加计算时间，但可能提高特征提取的精度。(4)
+- `min_contrast`：特征点检测时的对比度阈值。该值用于排除一些对比度较低的点，避免提取出不明显的特征点。(0.04)
+- `scales`：定义不同的尺度大小列表，可以让用户自定义要使用的尺度。通过设置不同的尺度，可以改变特征点提取的精度。(通过 n_octaves 和 n_scales_per_octave 动态生成)
+- `use_unnormalized_scales`：如果为 true，则算法在计算尺度时不对尺度进行归一化。这通常会影响检测的精度，但在某些应用中，可能会获得更好的性能。(false)
+- `search_method`：设置邻域搜索方法。常用的搜索方法是 pcl::search::KdTree，这可以加速在大规模点云中的搜索。通过选择不同的搜索方法，可以影响计算效率和准确性。(nullptr)
+- `number_of_threads`：设置使用的线程数。这个参数允许并行计算，以加速关键点提取过程，特别是对于大规模点云数据。(1)
+- `do_voxel_grid_filter`：如果为 true，则在特征点提取之前会对点云进行体素网格滤波（Voxel Grid Filter）。这有助于减少点云的密度，进而提高计算效率。(false)
+
+### 3.3 代码
+
+```cpp
+#include <iostream>
+#include <pcl/io/ply_io.h>
+#include <pcl/point_types.h>
+
+#include <pcl/features/normal_3d.h>
+#include <pcl/keypoints/sift_keypoint.h>
+
+#include "resolution.h"
+
+typedef pcl::PointXYZ PointT;
+
+int main(int argc, char** argv)
+{
+    if (argc != 2)
+    {
+        std::cerr << "Usage: " << argv[0] << " <input_cloud>" << std::endl;
+        return -1;
+    }
+
+    pcl::PointCloud<PointT>::Ptr cloud(new pcl::PointCloud<PointT>);
+    if (pcl::io::loadPLYFile<PointT>(argv[1], *cloud) == -1)
+    {
+        PCL_ERROR("Couldn't read file %s\n", argv[1]);
+        return -1;
+    }
+
+    std::cout << "original cloud size: " << cloud->size() << std::endl;
+
+    double resolution = computeCloudResolution(cloud);
+
+    // 法向量
+    pcl::NormalEstimation<PointT, pcl::PointNormal> ne;
+    pcl::PointCloud<pcl::PointNormal>::Ptr cloud_normals(new pcl::PointCloud<pcl::PointNormal>);
+    pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_n(new pcl::search::KdTree<pcl::PointXYZ>());
+    ne.setSearchMethod(tree_n);
+    ne.setInputCloud(cloud);
+    // ne.setRadiusSearch(resolution * 10);
+    ne.setKSearch(50);
+    ne.compute(*cloud_normals);
+
+    // 拷贝数据
+    for (size_t i = 0; i < cloud_normals->size(); ++i)
+    {
+        cloud_normals->points[i].x = cloud->points[i].x;
+        cloud_normals->points[i].y = cloud->points[i].y;
+        cloud_normals->points[i].z = cloud->points[i].z;
+    }
+
+    // SIFT参数
+    const float min_scale = 0.001f; // 最小尺度，控制算法在不同尺度空间中处理的尺度范围。
+    const int n_octaves = 3; // 尺度空间的八度数，表示多大的尺度范围。
+    const int n_scales_per_octave = 4; // 每个八度内的尺度数，控制每个尺度的细节。
+    const float min_contrast = 0.001f; // 最小对比度阈值，用于筛选低对比度的关键点。
+
+    // SIFT关键点
+    // 使用法向量作为强度计算关键点，还可以是颜色、强度等
+    pcl::SIFTKeypoint<pcl::PointNormal, pcl::PointWithScale> sift; // 创建 pcl::SIFTKeypoint 对象来执行 SIFT 关键点提取。
+    pcl::search::KdTree<pcl::PointNormal>::Ptr tree(new pcl::search::KdTree<pcl::PointNormal>());
+    
+    pcl::PointCloud<pcl::PointWithScale>::Ptr cloud_sift_keypoints(new pcl::PointCloud<pcl::PointWithScale>);
+    sift.setSearchMethod(tree);
+    sift.setScales(min_scale, n_octaves, n_scales_per_octave); // 设置尺度空间参数。
+    sift.setMinimumContrast(min_contrast); // 设置最小对比度阈值。
+    sift.setInputCloud(cloud_normals);
+    sift.compute(*cloud_sift_keypoints);
+    std::cout << "No of SIFT points in the result are " << cloud_sift_keypoints->points.size() << std::endl;
+
+    return 0;
+}
+```
+## 4. 更多
+
+自行搜索

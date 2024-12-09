@@ -19,9 +19,10 @@ add_executable(bilateralFilter src/bilateralFilter.cpp)
 add_executable(faceNormal src/faceNormal.cpp)
 add_executable(ISSKeypoint3D src/ISSKeypoint3D.cpp)
 add_executable(HarrisKeypoint3D src/HarrisKeypoint3D.cpp)
+add_executable(SIFTKeypoint src/SIFTKeypoint.cpp)
 # 将所有可执行文件放入列表中
 set(EXECUTABLES pcl_test input_output_test point_type kdsearch kdsearch_flann 
-PCLVisualizer filter_US filter_VG bilateralFilter faceNormal ISSKeypoint3D HarrisKeypoint3D)
+PCLVisualizer filter_US filter_VG bilateralFilter faceNormal ISSKeypoint3D HarrisKeypoint3D SIFTKeypoint)
 
 # 链接 PCL 库和包含目录到每个可执行文件
 foreach(exe ${EXECUTABLES})
