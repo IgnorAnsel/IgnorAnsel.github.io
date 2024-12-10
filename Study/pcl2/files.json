@@ -39,6 +39,14 @@
     {
       "name": "8_提取关键点",
       "path": "log/begin_pcl2/KeyPoint.md"
+    },
+    {
+      "name": "9_特征描述",
+      "path": "log/begin_pcl2/feature.md"
+    },
+    {
+      "name": "10_完整实例(点云匹配)",
+      "path": "log/begin_pcl2/Fullinstance.md"
     }
   ]
 }

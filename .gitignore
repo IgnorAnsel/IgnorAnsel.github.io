@@ -1,2 +1,4 @@
 Study/pcl2/code/build/
+build/
 .vscode/
+.vscode/settings.json

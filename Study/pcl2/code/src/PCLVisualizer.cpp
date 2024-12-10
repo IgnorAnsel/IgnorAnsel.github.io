@@ -14,9 +14,9 @@ int main(int argc, char** argv)
     pcl::PointCloud<PointT>::Ptr cloud(new pcl::PointCloud<PointT>);
 
     // 读取点云数据
-    if (pcl::io::loadPLYFile<pcl::PointXYZ>(argv[1], *cloud) == -1)
+    if (pcl::io::loadPCDFile<pcl::PointXYZ>(argv[1], *cloud) == -1)
     {
-        PCL_ERROR("Couldn't read file bunny.pcd \n");
+        PCL_ERROR("Couldn't read file b\n");
         return (-1);
     }
     // 设置点云颜色
