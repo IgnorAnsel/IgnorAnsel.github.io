@@ -115,3 +115,8 @@ int main(int argc, char **argv)
     return 0;
 }
 ```
+
+匹配结果：
+![image-pipei](https://ignoransel.github.io/pic/pcl2/pipei.png)
+
+也许结果不是很好，但是这个例子只是演示了如何使用PCL2进行点云配准（粗匹配）。在实际应用中，可能需要调整参数或使用更复杂的算法来获得更好的结果。
