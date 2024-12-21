@@ -106,7 +106,6 @@
                 /* 拖动时的指针 */
             }
 
-
             #content {
                 margin-left: 0;
                 /* 内容区宽度不受侧边栏影响 */
@@ -146,13 +145,15 @@
 
         toggleButton.addEventListener('drag', (e) => {
             if (e.clientX === 0 && e.clientY === 0) return;
+
+            // 更新按钮的位置
             toggleButton.style.top = `${e.clientY - 20}px`; // 更新按钮的垂直位置
             toggleButton.style.left = `${e.clientX - 20}px`; // 更新按钮的水平位置
         });
 
         toggleButton.addEventListener('dragend', (e) => {
-            toggleButton.style.top = `${e.clientY - 20}px`;
-            toggleButton.style.left = `${e.clientX - 20}px`;
+            toggleButton.style.top = `${e.clientY - 20}px`; // 保持拖动结束后的位置
+            toggleButton.style.left = `${e.clientX - 20}px`; // 保持拖动结束后的位置
         });
 
         // 检测屏幕大小，展示/隐藏按钮
