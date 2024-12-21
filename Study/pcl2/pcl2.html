@@ -90,13 +90,14 @@
             #toggle-button {
                 display: block;
                 position: absolute;
-                top: 20px;
-                left: 20px;
+                font-size: 10px;
+                top: 2px;
+                left: 2px;
                 z-index: 1000;
                 background-color: #333;
                 color: #fff;
                 border: none;
-                padding: 10px;
+                padding: 5px;
                 cursor: pointer;
             }
 
@@ -120,7 +121,7 @@
         <h2 id="default-message">请选择一个文件查看</h2>
         <div id="file-content"></div>
     </div>
-    <button id="toggle-button" style="display: none; position: absolute; top: 20px; left: 20px;">☰</button>
+    <button id="toggle-button" style="display: none; position: absolute; top: 20px; left: 20px;">☰完整显示点这个</button>
     <script>
         // 检测屏幕大小，展示/隐藏按钮
         if (window.innerWidth <= 768) {
