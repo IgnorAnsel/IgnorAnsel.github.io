@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown Viewer</title>
-    
+
     <!-- 引入本地 Prism 核心文件和样式 -->
     <link href="https://ignoransel.github.io/libs/prism/prism.css" rel="stylesheet" />
     <script src="https://ignoransel.github.io/libs/prism/prism.js"></script>
@@ -16,15 +17,18 @@
             display: flex;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
-        /* Left sidebar */
         #sidebar {
             width: 250px;
+            /* 固定宽度 */
             background-color: #f4f4f4;
             padding: 20px;
             overflow-y: auto;
             border-right: 2px solid #ddd;
+            flex-shrink: 0;
+            /* 防止左侧栏缩小 */
         }
 
         #sidebar ul {
@@ -42,18 +46,48 @@
             background-color: #ddd;
         }
 
-        /* Right content area */
         #content {
             flex-grow: 1;
             padding: 20px;
             overflow-y: auto;
+            max-height: 100vh;
+            overflow: auto;
         }
 
         #content h1 {
             color: #333;
         }
+
+        /* 手机端优化 */
+        @media (max-width: 768px) {
+            #sidebar {
+                width: 200px;
+                /* 调整为较小的宽度 */
+                padding: 10px;
+            }
+
+            #content {
+                padding: 10px;
+            }
+
+            #sidebar ul {
+                font-size: 14px;
+                /* 更小的字体 */
+            }
+
+            /* 让侧边栏在小屏幕下折叠（可选） */
+            #sidebar {
+                display: none;
+            }
+
+            #content {
+                margin-left: 0;
+                /* 让右侧内容区扩展 */
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Sidebar for file list -->
     <div id="sidebar">
@@ -66,8 +100,30 @@
         <h2 id="default-message">请选择一个文件查看</h2>
         <div id="file-content"></div>
     </div>
-
+    <button id="toggle-button" style="display: none; position: absolute; top: 20px; left: 20px;">☰</button>
     <script>
+        // 检测屏幕大小，展示/隐藏按钮
+        if (window.innerWidth <= 768) {
+            document.getElementById('toggle-button').style.display = 'block';
+        }
+    </script>
+    <script>
+        // 添加按钮来切换侧边栏的显示和隐藏
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+
+            if (sidebar.style.display === 'none') {
+                sidebar.style.display = 'block';
+                content.style.marginLeft = '250px';  // 当侧边栏显示时，内容区推开
+            } else {
+                sidebar.style.display = 'none';
+                content.style.marginLeft = '0';  // 当侧边栏隐藏时，内容区占满整个屏幕
+            }
+        }
+
+        document.getElementById('toggle-button').addEventListener('click', toggleSidebar);
+
         // 加载 JSON 文件，获取 Markdown 文件列表
         fetch('files.json')  // 直接通过相对路径加载 JSON 文件
             .then(response => response.json())
@@ -113,4 +169,5 @@
         }
     </script>
 </body>
+
 </html>
