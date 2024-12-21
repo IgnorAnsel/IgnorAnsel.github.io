@@ -29,6 +29,8 @@
             border-right: 2px solid #ddd;
             flex-shrink: 0;
             /* 防止左侧栏缩小 */
+            transition: transform 0.3s ease-in-out;
+            /* 使侧边栏的显示和隐藏更流畅 */
         }
 
         #sidebar ul {
@@ -52,6 +54,8 @@
             overflow-y: auto;
             max-height: 100vh;
             overflow: auto;
+            transition: margin-left 0.3s ease-in-out;
+            /* 平滑过渡 */
         }
 
         #content h1 {
@@ -68,6 +72,8 @@
 
             #content {
                 padding: 10px;
+                margin-left: 0;
+                /* 当侧边栏隐藏时，右侧内容区扩展 */
             }
 
             #sidebar ul {
@@ -75,14 +81,28 @@
                 /* 更小的字体 */
             }
 
-            /* 让侧边栏在小屏幕下折叠（可选） */
+            /* 在小屏幕下隐藏侧边栏 */
             #sidebar {
                 display: none;
             }
 
+            /* 让侧边栏按钮可见 */
+            #toggle-button {
+                display: block;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 1000;
+                background-color: #333;
+                color: #fff;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+            }
+
             #content {
                 margin-left: 0;
-                /* 让右侧内容区扩展 */
+                /* 内容区宽度不受侧边栏影响 */
             }
         }
     </style>
@@ -106,8 +126,7 @@
         if (window.innerWidth <= 768) {
             document.getElementById('toggle-button').style.display = 'block';
         }
-    </script>
-    <script>
+
         // 添加按钮来切换侧边栏的显示和隐藏
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -167,6 +186,7 @@
                     document.getElementById('file-content').innerHTML = '<p>无法加载文件内容。</p>';
                 });
         }
+
     </script>
 </body>
 
