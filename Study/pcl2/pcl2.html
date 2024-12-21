@@ -97,8 +97,15 @@
                 color: #fff;
                 border: none;
                 padding: 10px;
-                cursor: pointer;
+                cursor: grab;
+                /* 改为可抓取的指针 */
             }
+
+            #toggle-button:active {
+                cursor: grabbing;
+                /* 拖动时的指针 */
+            }
+
 
             #content {
                 margin-left: 0;
@@ -120,31 +127,41 @@
         <h2 id="default-message">请选择一个文件查看</h2>
         <div id="file-content"></div>
     </div>
-    <button id="toggle-button" style="display: none; position: absolute; top: 20px; left: 20px;">☰</button>
+    <!-- 可拖动按钮 -->
+    <button id="toggle-button" style="display: none; position: absolute; top: 20px; left: 20px;" draggable="true">
+        <span>☰</span><span> 完整显示点这个</span>
+    </button>
+
     <script>
+        // 获取按钮元素
+        const toggleButton = document.getElementById('toggle-button');
+
+        // 添加拖拽事件处理器
+        toggleButton.addEventListener('dragstart', (e) => {
+            const rect = toggleButton.getBoundingClientRect();
+            e.dataTransfer.setData('text/plain', ''); // 必须设置这个，以便拖拽工作
+            e.dataTransfer.setDragImage(toggleButton, rect.width / 2, rect.height / 2);
+            toggleButton.style.position = 'absolute'; // 设置按钮的绝对定位
+        });
+
+        toggleButton.addEventListener('drag', (e) => {
+            if (e.clientX === 0 && e.clientY === 0) return;
+            toggleButton.style.top = `${e.clientY - 20}px`; // 更新按钮的垂直位置
+            toggleButton.style.left = `${e.clientX - 20}px`; // 更新按钮的水平位置
+        });
+
+        toggleButton.addEventListener('dragend', (e) => {
+            toggleButton.style.top = `${e.clientY - 20}px`;
+            toggleButton.style.left = `${e.clientX - 20}px`;
+        });
+
         // 检测屏幕大小，展示/隐藏按钮
         if (window.innerWidth <= 768) {
-            document.getElementById('toggle-button').style.display = 'block';
+            toggleButton.style.display = 'block';
         }
-
-        // 添加按钮来切换侧边栏的显示和隐藏
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const content = document.getElementById('content');
-
-            if (sidebar.style.display === 'none') {
-                sidebar.style.display = 'block';
-                content.style.marginLeft = '250px';  // 当侧边栏显示时，内容区推开
-            } else {
-                sidebar.style.display = 'none';
-                content.style.marginLeft = '0';  // 当侧边栏隐藏时，内容区占满整个屏幕
-            }
-        }
-
-        document.getElementById('toggle-button').addEventListener('click', toggleSidebar);
 
         // 加载 JSON 文件，获取 Markdown 文件列表
-        fetch('files.json')  // 直接通过相对路径加载 JSON 文件
+        fetch('files.json')
             .then(response => response.json())
             .then(data => {
                 const fileListElement = document.getElementById('file-list');
@@ -162,23 +179,20 @@
 
         // 根据路径加载和渲染 Markdown 文件
         function loadMarkdown(filePath) {
-            // 移除默认的提示信息
             const defaultMessage = document.getElementById('default-message');
             if (defaultMessage) {
-                defaultMessage.style.display = 'none';  // 隐藏提示信息
+                defaultMessage.style.display = 'none';
             }
 
             const baseUrl = "https://ignoransel.github.io/Study/pcl2/";
-            const fullUrl = new URL(filePath, baseUrl).href;  // 自动处理路径拼接
+            const fullUrl = new URL(filePath, baseUrl).href;
             fetch(fullUrl)
                 .then(response => response.text())
                 .then(markdownContent => {
-                    // 解析 Markdown 内容
-                    const htmlContent = marked.parse(markdownContent);  // 使用新的 API
+                    const htmlContent = marked.parse(markdownContent);
                     const contentElement = document.getElementById('file-content');
                     contentElement.innerHTML = htmlContent;
 
-                    // 语法高亮处理代码块
                     Prism.highlightAll(); // 语法高亮
                 })
                 .catch(error => {
@@ -186,7 +200,6 @@
                     document.getElementById('file-content').innerHTML = '<p>无法加载文件内容。</p>';
                 });
         }
-
     </script>
 </body>
 
