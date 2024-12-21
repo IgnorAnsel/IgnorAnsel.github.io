@@ -34,7 +34,8 @@
             <h3>我的内容</h3>
             <!-- 选项卡按钮 -->
             <div class="tabs">
-                <button class="tab-button active" data-tab="github-projects" onclick="showTab('github-projects')">GitHub 项目</button>
+                <button class="tab-button active" data-tab="github-projects" onclick="showTab('github-projects')">GitHub
+                    项目</button>
                 <button class="tab-button" data-tab="pending" onclick="showTab('pending')">待定</button>
                 <button class="tab-button" data-tab="blog" onclick="showTab('blog')">Blog</button>
                 <button class="tab-button" data-tab="study" onclick="showTab('study')">学习记录</button>
@@ -59,12 +60,24 @@
             <!-- 学习记录区 -->
             <div id="study" class="tab-content" style="display: none;">
                 <h3>学习记录</h3>
-                <ul>
-                    <li><a href="./Study/urdf/urdf_study.html" target="_blank">URDF 学习</a></li>
-                    <li><a href="./Study/isaac_sim/isaac_sim_study.html" target="_blank">isaac_sim ros2</a></li>
-                    <li><a href="./Study/pcl2/pcl2.html" target="_blank">pcl2</a></li>
+                <div class="project-list">
+                    <div class="project-card">
+                        <h4>URDF 学习</h4>
+                        <p>学习内容描述 1</p>
+                        <a href="./Study/urdf/urdf_study.html" target="_blank">查看学习记录</a>
+                    </div>
+                    <div class="project-card">
+                        <h4>Isaac Sim ROS2</h4>
+                        <p>学习内容描述 2</p>
+                        <a href="./Study/isaac_sim/isaac_sim_study.html" target="_blank">查看学习记录</a>
+                    </div>
+                    <div class="project-card">
+                        <h4>PCL2</h4>
+                        <p>学习内容描述 3</p>
+                        <a href="./Study/pcl2/pcl2.html" target="_blank">查看学习记录</a>
+                    </div>
                     <!-- 可以添加更多学习内容 -->
-                </ul>
+                </div>
             </div>
 
             <!-- 待定区 -->
