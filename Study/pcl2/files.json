@@ -47,6 +47,14 @@
     {
       "name": "10_完整实例(点云匹配)",
       "path": "log/begin_pcl2/Fullinstance.md"
+    },
+    {
+      "name": "11_ICP精标配",
+      "path": "log/begin_pcl2/ICP.md"
+    },
+    {
+      "name": "12_曲面重建",
+      "path": "log/begin_pcl2/SurfaceReconstruction.md"
     }
   ]
 }
