@@ -202,5 +202,92 @@ viewer.spin();
 
 ## 移动立方体
 
+### 简介
+移动立方体（Marching Cubes）是一种用于从点云数据重建表面网格的算法。它通过遍历一个立方体网格，并在每个立方体中找到等值面来生成三角网格。
+
+### 具体代码
+``` cpp
+// Initialize objects
+    pcl::MarchingCubes<pcl::PointNormal>::Ptr mc(new pcl::MarchingCubesHoppe<pcl::PointNormal>);
+    //设置MarchingCubes对象的参数
+    mc->setIsoLevel(0.0f);
+    mc->setGridResolution(5, 5, 5);
+    mc->setPercentageExtendGrid(0.0f);
+    mc->setSearchMethod(tree2);
+    mc->setInputCloud(cloud_with_normals);
+    pcl::PolygonMesh mesh;//执行重构，结果保存在mesh中
+    mc->reconstruct(mesh);
+    // 其他部分和前面一样
+```
+
+### 代码解释
+
+#### MarchingCubes
+- setIsoLevel(0.0f)：设置等值面（Marching Cubes 算法中的等值面）的值。等值面是用于分割空间的平面，在这个例子中，我们使用 z=0 的平面作为等值面。
+- setGridResolution(5, 5, 5)：设置用于重建的立方体网格的分辨率。这里我们设置了一个 5x5x5 的网格。
+- setPercentageExtendGrid(0.0f)：设置扩展网格的百分比。这个参数控制是否扩展网格以包含更多的点云数据。0.0 表示不扩展网格，只使用点云数据中的点来构建网格。
+- setSearchMethod(tree2)：设置用于搜索点云数据的搜索方法。这里我们使用的是之前创建的 KD 树。
+- setInputCloud(cloud_with_normals)：设置输入的点云数据，这里使用的是带有法线的点云。
+- reconstruct(mesh)：执行 Marching Cubes 重构，将结果存储在 mesh（一个 PolygonMesh 对象）中。
+
+## B样条拟合
+
+### 简介
+B样条拟合是一种用于从点云数据重建曲线或曲面的算法。它通过拟合一系列的控制点来生成平滑的曲线或曲面。
+
+## 移动最小二乘
+
+### 简介
+移动最小二乘（Moving Least Squares，MLS）是一种用于从点云数据重建表面网格的算法。它通过最小二乘法拟合点云中的数据，生成一个平滑的曲面。
+- tips:虽说此类放在了Surface下面，但是通过反复的研究与使用，发现此类并不能输出
+拟合后的表面，不能生成Mesh或者Triangulations，只是将点云进行了MLS的映
+射，使得输出的点云更加平滑，进行上采样和计算法向量。
+### 具体代码
+``` cpp
+#include <iostream>
+#include <pcl/point_types.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/kdtree/kdtree_flann.h>
+#include <pcl/surface/mls.h>
+#include <pcl/visualization/pcl_visualizer.h>
+#include "resolution.h"
+int main(int argc, char **argv)
+{
+    // Load input file into a PointCloud<T> with an appropriate type
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>());
+    // Load bun0.pcd -- should be available with the PCL archive in test
+    pcl::io::loadPCDFile(argv[1], *cloud);
+    double resolution = computeCloudResolution(cloud);
+    // Create a KD-Tree
+    pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search ::KdTree<pcl::PointXYZ>);
+    // Output has the PointNormal type in order to store the normals calculated by MLS
+    pcl::PointCloud<pcl::PointNormal> mls_points;
+    // Init object (second point type is for the normals, even if unused)
+    pcl::MovingLeastSquares<pcl::PointXYZ, pcl::PointNormal> mls;
+    mls.setInputCloud(cloud);
+    mls.setComputeNormals(true);    // 我们都知道表面重构时需要估计点云的法向量，这里MLS提供了一种方法来估计点云法向量。（如果是true的话注意输出数据格式）。
+    //mls.setPolynomialFit(true);     // 对于法线的估计是有多项式还是仅仅依靠切线。
+    mls.setPolynomialOrder(3); // MLS拟合曲线的阶数，这个阶数在构造函数里默认是2，但是参考文献给出最好选择3或者4
+    mls.setSearchMethod(tree);
+    mls.setSearchRadius(10 * resolution);
+    // Reconstruct
+    mls.process(mls_points);
+    // Save output
+    // pcl::io::savePCDFile("bun0-mls.pcd", mls_points);
+    // show
+    pcl::visualization::PCLVisualizer viewer_1;
+    viewer_1.addPointCloud(cloud, "cloud");
+    viewer_1.spin();
+    pcl::visualization::PCLVisualizer viewer_2;
+    pcl::PointCloud<pcl::PointXYZ>::Ptr result(new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::copyPointCloud(mls_points, *result);
+    viewer_2.addPointCloud(result, "mls_points");
+    viewer_2.spin();
+    return 0;
+}
+```
+
+
+
 
 

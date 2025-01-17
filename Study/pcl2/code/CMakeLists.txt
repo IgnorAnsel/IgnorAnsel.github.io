@@ -45,6 +45,8 @@ add_executable(Add_pcl src/pclHandler/Add_pcl.cpp)
 #
 add_executable(GreedyProjection src/SurfaceReconstruction/GreedyProjection.cpp)
 add_executable(Poisson src/SurfaceReconstruction/Poisson.cpp)
+add_executable(MarchingCubes src/SurfaceReconstruction/MarchingCubes.cpp)
+add_executable(MLS src/SurfaceReconstruction/MLS.cpp)
 # 将所有可执行文件放入列表中
 set(EXECUTABLES pcl_test PLY2PCD input_output_test point_type kdsearch kdsearch_flann 
 PCLVisualizer filter_US filter_VG bilateralFilter faceNormal ISSKeypoint3D HarrisKeypoint3D SIFTKeypoint 
@@ -53,7 +55,7 @@ Fullinstance
 OrbbecTest
 ICP_example
 Rotate_pcl Add_pcl
-GreedyProjection Poisson)
+GreedyProjection Poisson MarchingCubes MLS)
 
 # 链接 PCL 库和包含目录到每个可执行文件
 foreach(exe ${EXECUTABLES})
